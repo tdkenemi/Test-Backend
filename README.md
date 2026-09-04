@@ -94,51 +94,49 @@ Cảm ơn anh đã review!
 <img width="1063" height="367" alt="image" src="https://github.com/user-attachments/assets/4611c831-a428-46dc-be58-6fce0f1e38ec" />
 <img width="1072" height="71" alt="image" src="https://github.com/user-attachments/assets/ab77f964-4fa8-4f5e-a9a8-9a576e429add" />
 
-
-
 ---
 
-## Bang tong hop ket qua theo de bai
+## Bảng tổng hợp kết quả theo đề bài
 
-| # | Tinh huong | Ket qua mong doi | Ket qua thuc te |
+| # | Tình huống | Kết quả mong đợi | Kết quả thực tế |
 |---|-----------|-----------------|-----------------|
-| 1 | Dang ky email chua ton tai, du lieu hop le | 201 Thanh cong | 201 ✅ |
-| 2 | Dang ky lai email da ton tai | 400 Email da ton tai | 400 ✅ |
-| 3 | 2 request cung email gan nhu dong thoi | Chi 1 thanh cong, con lai 400 | 400 (MongoDB unique index) ✅ |
-| 4 | Dang nhap dung email va mat khau | 200 + JWT token | 200 ✅ |
-| 5 | Dang nhap sai mat khau | 401 Tu choi, khong cap token | 401 ✅ |
-| 6 | GET /me voi token hop le | 200 + thong tin tai khoan | 200 ✅ |
-| 7 | GET /me khong co token | 401 Tu choi | 401 ✅ |
-| 8 | GET /me token sai / het han | 401 Tu choi | 401 ✅ |
-| 9 | GET /products?status=available co token | 200 + dung danh sach | 200 ✅ |
-| 10 | GET /products?status=... khong co token | 401 Tu choi | 401 ✅ |
-| 11 | GET /products?status=gia_tri_khong_hop_le | 400 Loi ro rang | 400 ✅ |
-| 12 | Sai 5 lan, lan 6 dung mat khau | 429 Van bi chan | 429 ✅ |
+| 1 | Đăng ký email chưa tồn tại, dữ liệu hợp lệ | 201 Thành công | 201 ✅ |
+| 2 | Đăng ký lại email đã tồn tại | 400 Email đã tồn tại | 400 ✅ |
+| 3 | 2 request cùng email gần như đồng thời | Chỉ 1 thành công, còn lại 400 | 400 (MongoDB unique index) ✅ |
+| 4 | Đăng nhập đúng email và mật khẩu | 200 + JWT token | 200 ✅ |
+| 5 | Đăng nhập sai mật khẩu | 401 Từ chối, không cấp token | 401 ✅ |
+| 6 | GET /me với token hợp lệ | 200 + thông tin tài khoản | 200 ✅ |
+| 7 | GET /me không có token | 401 Từ chối | 401 ✅ |
+| 8 | GET /me token sai / hết hạn | 401 Từ chối | 401 ✅ |
+| 9 | GET /products?status=available có token | 200 + đúng danh sách | 200 ✅ |
+| 10 | GET /products?status=... không có token | 401 Từ chối | 401 ✅ |
+| 11 | GET /products?status=gia_tri_khong_hop_le | 400 Lỗi rõ ràng | 400 ✅ |
+| 12 | Sai 5 lần, lần 6 đúng mật khẩu | 429 Vẫn bị chặn | 429 ✅ |
 
 ---
 
-## Cach chay du an
+## Cách chạy dự án
 
-### Yeu cau
+### Yêu cầu
 
 - Node.js >= 16
-- MongoDB (local hoac Atlas)
+- MongoDB (local hoặc Atlas)
 
-### Buoc 1 — Cai dependencies
+### Bước 1 — Cài dependencies
 
 ```
 npm install
 ```
 
-### Buoc 2 — Tao file `.env`
+### Bước 2 — Tạo file `.env`
 
-Sao chep file `.env.example` thanh `.env` va dien gia tri thuc:
+Sao chép file `.env.example` thành `.env` và điền giá trị thực:
 
 ```
 copy .env.example .env
 ```
 
-Noi dung `.env`:
+Nội dung `.env`:
 
 ```
 PORT=3000
@@ -146,15 +144,15 @@ MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<dbname>
 JWT_SECRET=chuoi-bi-mat-du-dai-va-ngau-nhien
 ```
 
-> **Luu y bao mat:** File `.env` da duoc them vao `.gitignore` — TUYET DOI khong commit file nay len GitHub.
+> **Lưu ý bảo mật:** File `.env` đã được thêm vào `.gitignore` — TUYỆT ĐỐI không commit file này lên GitHub.
 
-### Buoc 3 — Chay server
+### Bước 3 — Chạy server
 
 ```
 node server.js
 ```
 
-Ket qua mong doi:
+Kết quả mong đợi:
 
 ```
 MongoDB da ket noi thanh cong
@@ -163,36 +161,36 @@ Server dang chay tai http://localhost:3000
 
 ---
 
-## Cau truc du an
+## Cấu trúc dự án
 
 ```
 .
 ├── server.js            # Entry point: Express + routes + error handlers
 ├── models.js            # Mongoose schemas: User, Product
-├── authController.js    # POST /register, POST /login (co brute-force protection)
+├── authController.js    # POST /register, POST /login (có brute-force protection)
 ├── middlewares.js       # authMiddleware: verify JWT
 ├── productController.js # GET /me, GET /products
-├── .env                 # Bien moi truong THUC (khong commit)
-├── .env.example         # Mau bien moi truong (commit duoc)
-├── .gitignore           # An .env va node_modules
+├── .env                 # Biến môi trường THỰC (không commit)
+├── .env.example         # Mẫu biến môi trường (commit được)
+├── .gitignore           # Ẩn .env và node_modules
 └── README.md
 ```
 
 ---
 
-## Quyet dinh ky thuat
+## Quyết định kỹ thuật
 
-### Chong Race-condition dang ky trung email
+### Chống Race-condition đăng ký trùng email
 
-**Van de:** 2 request cung email gui dong thoi co the vuot qua kiem tra "email da ton tai" truoc khi ban ghi dau tien duoc luu.
+**Vấn đề:** 2 request cùng email gửi đồng thời có thể vượt qua kiểm tra "email đã tồn tại" trước khi bản ghi đầu tiên được lưu.
 
-**Giai phap:** Tang `unique: true` tren truong `email` o Mongoose Schema. MongoDB tao **unique index** o tang storage engine. Du bao nhieu request dong thoi, **chi duy nhat 1 thanh cong**, tat ca con lai nhan `DuplicateKeyError (code 11000)`.
+**Giải pháp:** Tăng `unique: true` trên trường `email` ở Mongoose Schema. MongoDB tạo **unique index** ở tầng storage engine. Dù bao nhiêu request đồng thời, **chỉ duy nhất 1 thành công**, tất cả còn lại nhận `DuplicateKeyError (code 11000)`.
 
 ```js
 // models.js
 email: { type: String, required: true, unique: true, lowercase: true, trim: true }
 
-// authController.js — bat loi sau khi DB tu choi
+// authController.js — bắt lỗi sau khi DB từ chối
 } catch (error) {
   if (error.code === 11000) {
     return res.status(400).json({ message: 'Email da ton tai' });
@@ -200,55 +198,55 @@ email: { type: String, required: true, unique: true, lowercase: true, trim: true
 }
 ```
 
-### Chong Brute-force do mat khau
+### Chống Brute-force dò mật khẩu
 
-**Giai phap:** In-memory `Map` theo doi so lan sai theo tung `email` (khong theo IP de tranh bi qua mat boi proxy).
+**Giải pháp:** Sử dụng In-memory `Map` theo dõi số lần sai theo từng `email` (không theo IP để tránh bị qua mặt bởi proxy).
 
-| Tham so | Gia tri |
+| Tham số | Giá trị |
 |---------|---------|
-| So lan sai toi da | 5 lan |
-| Cua so dem | 1 phut |
-| Thoi gian khoa | 1 phut |
+| Số lần sai tối đa | 5 lần |
+| Cửa sổ đếm | 1 phút |
+| Thời gian khóa | 1 phút |
 
-**Diem then chot:** Kiem tra trang thai khoa **TRUOC** khi truy van DB va so sanh mat khau — ke ca mat khau dung van bi chan trong thoi gian khoa.
+**Điểm then chốt:** Kiểm tra trạng thái khóa **TRƯỚC** khi truy vấn DB và so sánh mật khẩu — kể cả mật khẩu đúng vẫn bị chặn trong thời gian khóa.
 
-### Bao mat mat khau
+### Bảo mật mật khẩu
 
-Mat khau duoc hash bang `bcrypt` (saltRounds = 10). Khong bao gio luu plain text. Khi dang nhap dung `bcrypt.compare()`.
+Mật khẩu được hash bằng `bcrypt` (saltRounds = 10). Không bao giờ lưu plain text. Khi đăng nhập dùng `bcrypt.compare()`.
 
-### Chong Username Enumeration
+### Chống Username Enumeration
 
-`POST /login` tra cung 1 message cho ca hai truong hop: email khong ton tai va sai mat khau. Ke tan cong khong biet duoc email nao da dang ky.
+`POST /login` trả cùng 1 message cho cả hai trường hợp: email không tồn tại và sai mật khẩu. Kẻ tấn công không biết được email nào đã đăng ký.
 
 ---
 
-## Huong dan kiem thu bang cURL (Windows)
+## Hướng dẫn kiểm thử bằng cURL (Windows)
 
-> **Ghi chu dinh dang:**
-> - Cac lenh duoi day dung cu phap **Git Bash tren Windows** (`\"` de thoat dau ngoac kep)
-> - Neu dung **Command Prompt (cmd):** thay toan bo bang `"..."` va thoat `\"` ben trong
-> - **Thay `YOUR_TOKEN`** bang token thuc lay tu buoc dang nhap
+> **Ghi chú định dạng:**
+> - Các lệnh dưới đây dùng cú pháp **Git Bash trên Windows** (`\"` để thoát dấu ngoặc kép)
+> - Nếu dùng **Command Prompt (cmd):** thay toàn bộ bằng `"..."` và thoát `\"` bên trong
+> - **Thay `YOUR_TOKEN`** bằng token thực lấy từ bước đăng nhập
 
 ---
 
 ### POST /register
 
-**Hop le — mong doi 201:**
+**Hợp lệ — mong đợi 201:**
 ```
 curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
-**Email sai dinh dang — mong doi 400:**
+**Email sai định dạng — mong đợi 400:**
 ```
 curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"khonghople\", \"password\": \"matkhau123\"}"
 ```
 
-**Password <= 6 ky tu — mong doi 400:**
+**Password <= 6 ký tự — mong đợi 400:**
 ```
 curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test2@example.com\", \"password\": \"123\"}"
 ```
 
-**Email da ton tai — mong doi 400:**
+**Email đã tồn tại — mong đợi 400:**
 ```
 curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
@@ -257,12 +255,12 @@ curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/js
 
 ### POST /login
 
-**Dang nhap dung — mong doi 200 + token:**
+**Đăng nhập đúng — mong đợi 200 + token:**
 ```
 curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
-**Sai mat khau — mong doi 401:**
+**Sai mật khẩu — mong đợi 401:**
 ```
 curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
@@ -271,17 +269,17 @@ curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json"
 
 ### GET /me
 
-**Co token hop le — mong doi 200:**
+**Có token hợp lệ — mong đợi 200:**
 ```
 curl.exe http://localhost:3000/me -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-**Khong co token — mong doi 401:**
+**Không có token — mong đợi 401:**
 ```
 curl.exe http://localhost:3000/me
 ```
 
-**Token sai — mong doi 401:**
+**Token sai — mong đợi 401:**
 ```
 curl.exe http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
 ```
@@ -290,60 +288,60 @@ curl.exe http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
 
 ### GET /products
 
-**Tat ca san pham — mong doi 200:**
+**Tất cả sản phẩm — mong đợi 200:**
 ```
 curl.exe "http://localhost:3000/products" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-**Loc available — mong doi 200:**
+**Lọc available — mong đợi 200:**
 ```
 curl.exe "http://localhost:3000/products?status=available" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-**Loc out_of_stock — mong doi 200:**
+**Lọc out_of_stock — mong đợi 200:**
 ```
 curl.exe "http://localhost:3000/products?status=out_of_stock" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-**Loc discontinued — mong doi 200:**
+**Lọc discontinued — mong đợi 200:**
 ```
 curl.exe "http://localhost:3000/products?status=discontinued" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-**Status khong hop le — mong doi 400:**
+**Status không hợp lệ — mong đợi 400:**
 ```
 curl.exe "http://localhost:3000/products?status=invalid_value" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-**Khong co token — mong doi 401:**
+**Không có token — mong đợi 401:**
 ```
 curl.exe "http://localhost:3000/products?status=available"
 ```
 
 ---
 
-### Brute-force (chay 6 lan lien tiep)
+### Brute-force (chạy 6 lần liên tiếp)
 
-**Lan 1-4 (mong doi 401 + so lan con lai):**
+**Lần 1-4 (mong đợi 401 + số lần còn lại):**
 ```
 curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
-**Lan 5 (mong doi 429 - bi khoa):**
+**Lần 5 (mong đợi 429 - bị khóa):**
 ```
 curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
-**Lan 6 — DUNG mat khau nhung VAN 429:**
+**Lần 6 — ĐÚNG mật khẩu nhưng VẪN 429:**
 ```
 curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 ---
 
-## Du lieu san pham mau (hardcode)
+## Dữ liệu sản phẩm mẫu (hardcode)
 
-| id | Ten san pham              | Status       |
+| id | Tên sản phẩm              | Status       |
 |----|---------------------------|--------------|
 | 1  | Laptop Dell XPS 15        | available    |
 | 2  | iPhone 15 Pro Max         | available    |
