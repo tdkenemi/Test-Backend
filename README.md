@@ -6,7 +6,7 @@
 
 ---
 
-## 📩 Lời ngỏ gửi anh An Phú (HR/Tech Lead)
+## 📩 Gửi anh An Phú 
 
 Dạ em chào anh Phú, em gửi anh kết quả bài Test Backend ạ. 
 
