@@ -12,61 +12,74 @@
 
 ### 1. Dang ky thanh cong
 
-![Anh 1](./screenshots/anh1.png)
+<img width="856" height="238" alt="image" src="https://github.com/user-attachments/assets/f144c527-e3d5-482e-9166-0130fbafcfe3" />
+
+
 
 ---
 
 ### 2. Dang ky lai email da ton tai
 
-![Anh 2](./screenshots/anh2.png)
+<img width="1045" height="117" alt="image" src="https://github.com/user-attachments/assets/12d59d58-a894-45ed-a2ff-1aeff792b520" />
+
 
 ---
 
 ### 3. Dang nhap dung — nhan JWT token
 
-![Anh 3](./screenshots/anh3.png)
+<img width="1043" height="133" alt="image" src="https://github.com/user-attachments/assets/2f498d33-1403-4ad5-a6f9-7c3501be1ee5" />
+
 
 ---
 
 ### 4. Dang nhap sai mat khau
 
-![Anh 4](./screenshots/anh4.png)
+<img width="1052" height="118" alt="image" src="https://github.com/user-attachments/assets/bcadc4ba-7198-4bac-8267-d4de491b5784" />
+
 
 ---
 
 ### 5. GET /me voi token hop le
 
-![Anh 5](./screenshots/anh5.png)
+<img width="1061" height="82" alt="image" src="https://github.com/user-attachments/assets/a46b9d51-3d22-4ac1-b05b-b01f46e162a0" />
+
 
 ---
 
 ### 6. GET /me khong co token
 
-![Anh 6](./screenshots/anh6.png)
+<img width="768" height="113" alt="image" src="https://github.com/user-attachments/assets/c3bbbc09-e710-426e-b17d-9144779254b2" />
+
 
 ---
 
 ### 7. GET /products?status=available co token
 
-![Anh 7](./screenshots/anh7.png)
+<img width="1049" height="96" alt="image" src="https://github.com/user-attachments/assets/b0e21f74-a09c-4268-89ef-dc7aeebfa6a0" />
+
 
 ---
 
 ### 8. GET /products?status=gia_tri_sai
 
-![Anh 8](./screenshots/anh8.png)
+<img width="1071" height="83" alt="image" src="https://github.com/user-attachments/assets/0d864b8c-c542-40ee-bb5d-1d038ed793ad" />
+
 
 ---
 
 ### 9. GET /products khong co token
 
-![Anh 9](./screenshots/anh9.png)
+<img width="935" height="61" alt="image" src="https://github.com/user-attachments/assets/ff62d2ad-a71c-47f0-abf6-22190c24e1ce" />
+
 
 ---
 
 ### 10. Brute-force: sai 5 lan, lan 6 dung mat khau van bi chan
 
-![Anh 10](./screenshots/anh10.png)
+<img width="1063" height="367" alt="image" src="https://github.com/user-attachments/assets/4611c831-a428-46dc-be58-6fce0f1e38ec" />
+<img width="1072" height="71" alt="image" src="https://github.com/user-attachments/assets/ab77f964-4fa8-4f5e-a9a8-9a576e429add" />
+
+
 
 ---
 
