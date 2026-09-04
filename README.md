@@ -1,4 +1,4 @@
-﻿# Bai-test-Backend-AI — Trieu Duy Khang
+# Bai-test-Backend-AI — Trieu Duy Khang
 
 > **REST API** xac thuc nguoi dung va quan ly san pham  
 > Stack: **Node.js · Express.js · MongoDB Atlas · JWT · bcrypt**  
@@ -12,71 +12,61 @@
 
 ### 1. Dang ky thanh cong
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — POST /register thanh cong)*
+![Anh 1](./screenshots/anh1.png)
 
 ---
 
 ### 2. Dang ky lai email da ton tai
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — POST /register tra 400 Email da ton tai)*
+![Anh 2](./screenshots/anh2.png)
 
 ---
 
 ### 3. Dang nhap dung — nhan JWT token
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — POST /login tra 200 + token)*
+![Anh 3](./screenshots/anh3.png)
 
 ---
 
 ### 4. Dang nhap sai mat khau
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — POST /login tra 401)*
+![Anh 4](./screenshots/anh4.png)
 
 ---
 
 ### 5. GET /me voi token hop le
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — GET /me tra 200 + email + id)*
+![Anh 5](./screenshots/anh5.png)
 
 ---
 
 ### 6. GET /me khong co token
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — GET /me tra 401)*
+![Anh 6](./screenshots/anh6.png)
 
 ---
 
 ### 7. GET /products?status=available co token
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — GET /products loc dung trang thai)*
+![Anh 7](./screenshots/anh7.png)
 
 ---
 
 ### 8. GET /products?status=gia_tri_sai
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — GET /products tra 400 ro rang)*
+![Anh 8](./screenshots/anh8.png)
 
 ---
 
 ### 9. GET /products khong co token
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — GET /products tra 401)*
+![Anh 9](./screenshots/anh9.png)
 
 ---
 
 ### 10. Brute-force: sai 5 lan, lan 6 dung mat khau van bi chan
 
-<!-- Dan anh CMD vao day -->
-*(Anh chup man hinh CMD — Lan sai thu 5 tra 429, lan 6 dung mat khau van tra 429)*
+![Anh 10](./screenshots/anh10.png)
 
 ---
 
