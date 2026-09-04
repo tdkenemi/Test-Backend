@@ -217,22 +217,22 @@ Mat khau duoc hash bang `bcrypt` (saltRounds = 10). Khong bao gio luu plain text
 
 **Hop le — mong doi 201:**
 ```
-curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 **Email sai dinh dang — mong doi 400:**
 ```
-curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"khonghople\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"khonghople\", \"password\": \"matkhau123\"}"
 ```
 
 **Password <= 6 ky tu — mong doi 400:**
 ```
-curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test2@example.com\", \"password\": \"123\"}"
+curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test2@example.com\", \"password\": \"123\"}"
 ```
 
 **Email da ton tai — mong doi 400:**
 ```
-curl -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 ---
@@ -241,12 +241,12 @@ curl -X POST http://localhost:3000/register -H "Content-Type: application/json" 
 
 **Dang nhap dung — mong doi 200 + token:**
 ```
-curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 **Sai mat khau — mong doi 401:**
 ```
-curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
 ---
@@ -255,17 +255,17 @@ curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d 
 
 **Co token hop le — mong doi 200:**
 ```
-curl http://localhost:3000/me -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe http://localhost:3000/me -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Khong co token — mong doi 401:**
 ```
-curl http://localhost:3000/me
+curl.exe http://localhost:3000/me
 ```
 
 **Token sai — mong doi 401:**
 ```
-curl http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
+curl.exe http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
 ```
 
 ---
@@ -274,32 +274,32 @@ curl http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
 
 **Tat ca san pham — mong doi 200:**
 ```
-curl "http://localhost:3000/products" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/products" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Loc available — mong doi 200:**
 ```
-curl "http://localhost:3000/products?status=available" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/products?status=available" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Loc out_of_stock — mong doi 200:**
 ```
-curl "http://localhost:3000/products?status=out_of_stock" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/products?status=out_of_stock" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Loc discontinued — mong doi 200:**
 ```
-curl "http://localhost:3000/products?status=discontinued" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/products?status=discontinued" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Status khong hop le — mong doi 400:**
 ```
-curl "http://localhost:3000/products?status=invalid_value" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/products?status=invalid_value" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Khong co token — mong doi 401:**
 ```
-curl "http://localhost:3000/products?status=available"
+curl.exe "http://localhost:3000/products?status=available"
 ```
 
 ---
@@ -308,17 +308,17 @@ curl "http://localhost:3000/products?status=available"
 
 **Lan 1-4 (mong doi 401 + so lan con lai):**
 ```
-curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
 **Lan 5 (mong doi 429 - bi khoa):**
 ```
-curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
 **Lan 6 — DUNG mat khau nhung VAN 429:**
 ```
-curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 ---
