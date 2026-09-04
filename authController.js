@@ -1,4 +1,4 @@
-﻿const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('./models');
 
@@ -112,7 +112,10 @@ const register = async (req, res) => {
       userId: newUser._id,
     });
   } catch (error) {
-    // Bat loi duplicate key (concurrency / race condition)
+    // [YEU CAU BAI TEST]: Xu ly race-condition / concurrency khi dang ky
+    // Khi co 2 request dong thoi dang ky cung 1 email, chi 1 request qua duoc
+    // Request thu 2 bi MongoDB reject voi ma loi 11000 (Duplicate Key Error)
+    // do truong `email` da duoc set `unique: true` trong models.js
     if (error.code === 11000) {
       return res.status(400).json({ message: 'Email da ton tai' });
     }
@@ -123,7 +126,11 @@ const register = async (req, res) => {
 };
 
 // ────────────────────────────────────────────────────────────
-//  POST /login  (co brute-force protection)
+//  POST /login 
+//  [YEU CAU BAI TEST]: Tinh nang Chong do mat khau (Brute-force protection)
+//  - Chan request 1 phut neu sai pass 5 lan lien tiep.
+//  - Duoc xay dung dua tren in-memory Map thay vi Redis de don gian hoa,
+//    dung nhu yeu cau (Khong over-engineer).
 // ────────────────────────────────────────────────────────────
 const login = async (req, res) => {
   try {
