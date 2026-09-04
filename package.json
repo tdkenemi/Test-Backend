@@ -1,0 +1,22 @@
+{
+  "name": "bai-test-backend-ai-trieuduykhang",
+  "version": "1.0.0",
+  "description": "> REST API xay dung bang **Express.js + Mongoose + JWT** voi tinh nang xac thuc va bao ve brute-force.",
+  "main": "authController.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.4"
+  }
+}
