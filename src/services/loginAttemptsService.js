@@ -1,55 +1,80 @@
-const MAX_ATTEMPTS  = 5;
-const WINDOW_MS     = 60 * 1000; // 1 phut
-const LOCKOUT_MS    = 60 * 1000; // bi khoa 1 phut
+// Hằng số định nghĩa cấu hình bảo vệ (Brute-force)
+const MAX_ATTEMPTS  = 5;          // Cho phép sai tối đa 5 lần
+const WINDOW_MS     = 60 * 1000; // Khung thời gian theo dõi (1 phút)
+const LOCKOUT_MS    = 60 * 1000; // Thời gian phạt khóa (1 phút)
 
+// Sử dụng Map lưu trữ trong RAM (In-Memory). Dùng cho môi trường 1 node.
+// Trong thực tế (hệ thống lớn/microservices), phần này sẽ được thay thế bằng Redis.
 const loginAttempts = new Map();
 
 /**
- * Lay hoac khoi tao record cho email.
- * Tu dong don dep record het thoi gian de tranh Memory Leak.
+ * Lấy hoặc khởi tạo Record theo dõi số lần sai của một email.
+ * 
+ * @param {string} email - Email cần lấy record
+ * @returns {object} Object chứa thông tin đếm số lần sai
  */
 const getRecord = (email) => {
   if (!loginAttempts.has(email)) {
+    // Khởi tạo nếu chưa tồn tại
     loginAttempts.set(email, { count: 0, lockedUntil: null, windowStart: Date.now() });
   }
   return loginAttempts.get(email);
 };
 
-/** Kiem tra email co dang bi khoa khong. */
+/** 
+ * Kiểm tra xem tài khoản (email) có đang trong trạng thái khóa phạt hay không. 
+ * 
+ * @param {object} record - Record được lấy ra từ getRecord
+ * @returns {boolean} True nếu đang bị khóa, False nếu được phép truy cập
+ */
 const isLocked = (record) => {
+  // Nếu vẫn còn thời hạn khóa
   if (record.lockedUntil && Date.now() < record.lockedUntil) {
     return true;
   }
-  // Het thoi gian khoa -> reset
+  
+  // Nếu thời hạn khóa đã qua -> Tự động mở khóa (Reset lại bộ đếm)
   if (record.lockedUntil && Date.now() >= record.lockedUntil) {
     record.count       = 0;
     record.lockedUntil = null;
     record.windowStart = Date.now();
   }
-  return false;
+  
+  return false; // Không bị khóa
 };
 
-/** Ghi nhan lan dang nhap sai. */
+/** 
+ * Hàm được gọi mỗi khi người dùng đăng nhập SAI mật khẩu (hoặc sai email).
+ * Sẽ đếm số lần sai và tự động đặt trạng thái Khóa (lockedUntil) nếu vượt ngưỡng.
+ * 
+ * @param {string} email - Email vừa đăng nhập thất bại
+ */
 const recordFailure = (email) => {
   const record = getRecord(email);
 
-  // Neu cua so 1 phut da qua, reset dem
+  // Nếu lần đăng nhập sai gần nhất đã cách đây HƠN 1 phút (khung thời gian Window)
+  // thì ta tha lỗi, reset lại bộ đếm từ đầu.
   if (Date.now() - record.windowStart >= WINDOW_MS) {
     record.count       = 0;
     record.windowStart = Date.now();
     record.lockedUntil = null;
   }
 
+  // Tăng số lần sai
   record.count += 1;
 
+  // Nếu quá 5 lần sai, khóa tài khoản trong 1 phút kể từ bây giờ
   if (record.count >= MAX_ATTEMPTS) {
     record.lockedUntil = Date.now() + LOCKOUT_MS;
   }
 };
 
-/** Reset dem sau khi dang nhap thanh cong. */
+/** 
+ * Hàm được gọi khi người dùng đăng nhập THÀNH CÔNG.
+ * Chức năng: Xóa toàn bộ lịch sử đếm sai của email này khỏi RAM, dọn dẹp bộ nhớ.
+ */
 const resetRecord = (email) => {
-  loginAttempts.delete(email);
+  loginAttempts.delete(email); // Xóa khỏi Map
 };
 
 module.exports = {
