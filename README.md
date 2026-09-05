@@ -163,17 +163,31 @@ Server dang chay tai http://localhost:3000
 
 ## Cấu trúc dự án
 
-```
+```text
 .
-├── server.js            # Entry point: Express + routes + error handlers
-├── models.js            # Mongoose schemas: User, Product
-├── authController.js    # POST /register, POST /login (có brute-force protection)
-├── middlewares.js       # authMiddleware: verify JWT
-├── productController.js # GET /me, GET /products
-├── .env                 # Biến môi trường THỰC (không commit)
-├── .env.example         # Mẫu biến môi trường (commit được)
-├── .gitignore           # Ẩn .env và node_modules
-└── README.md
+├── src/
+│   ├── config/
+│   │   └── db.js                 # Logic kết nối MongoDB
+│   ├── controllers/
+│   │   ├── authController.js     # API đăng nhập & đăng ký
+│   │   └── productController.js  # API sản phẩm
+│   ├── middlewares/
+│   │   ├── authMiddleware.js     # Middleware xác thực JWT
+│   │   └── errorHandler.js       # Global Error Handler
+│   ├── models/
+│   │   ├── index.js              # Khởi tạo và export models
+│   │   ├── Product.js            # Mongoose Schema: Product
+│   │   └── User.js               # Mongoose Schema: User
+│   ├── routes/
+│   │   ├── authRoutes.js         # Endpoints cho Auth
+│   │   └── productRoutes.js      # Endpoints cho Product
+│   └── services/
+│       └── loginAttemptsService.js # In-memory Brute-force protection
+├── server.js                     # Entry point (Express server & routes)
+├── .env                          # Biến môi trường THỰC (không commit)
+├── .env.example                  # Mẫu biến môi trường (commit được)
+├── .gitignore                    # Ẩn .env và node_modules
+└── README.md                     # Tài liệu dự án
 ```
 
 ---
