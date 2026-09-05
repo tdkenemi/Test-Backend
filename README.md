@@ -234,35 +234,35 @@ Mật khẩu được hash bằng `bcrypt` (saltRounds = 10). Không bao giờ l
 
 ---
 
-## Hướng dẫn kiểm thử bằng cURL (Windows)
+## Hướng dẫn kiểm thử bằng PowerShell (Windows)
 
-> **Ghi chú định dạng:**
-> - Các lệnh dưới đây dùng cú pháp **Git Bash trên Windows** (`\"` để thoát dấu ngoặc kép)
-> - Nếu dùng **Command Prompt (cmd):** thay toàn bộ bằng `"..."` và thoát `\"` bên trong
-> - **Thay `YOUR_TOKEN`** bằng token thực lấy từ bước đăng nhập
+> **Lưu ý quan trọng:**
+> - Các lệnh dưới đây dùng chuẩn native **PowerShell** (`Invoke-RestMethod`) để tránh lỗi mất ngoặc kép của cURL trên Windows.
+> - Bạn chỉ việc copy paste nguyên vẹn từng khối lệnh dưới đây vào Terminal PowerShell là chạy 100% thành công.
+> - **Thay `YOUR_TOKEN`** bằng token thực lấy từ bước đăng nhập.
 
 ---
 
 ### POST /register
 
 **Hợp lệ — mong đợi 201:**
-```
-curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}'
 ```
 
 **Email sai định dạng — mong đợi 400:**
-```
-curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"khonghople\", \"password\": \"matkhau123\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "khonghople", "password": "matkhau123"}' -SkipHttpErrorCheck
 ```
 
 **Password <= 6 ký tự — mong đợi 400:**
-```
-curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"test2@example.com\", \"password\": \"123\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test2@example.com", "password": "123"}' -SkipHttpErrorCheck
 ```
 
 **Email đã tồn tại — mong đợi 400:**
-```
-curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}' -SkipHttpErrorCheck
 ```
 
 ---
@@ -270,13 +270,13 @@ curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: applicatio
 ### POST /login
 
 **Đăng nhập đúng — mong đợi 200 + token:**
-```
-curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}'
 ```
 
 **Sai mật khẩu — mong đợi 401:**
-```
-curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}' -SkipHttpErrorCheck
 ```
 
 ---
@@ -284,18 +284,18 @@ curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/j
 ### GET /me
 
 **Có token hợp lệ — mong đợi 200:**
-```
-curl.exe http://localhost:3000/api/me -H "Authorization: Bearer YOUR_TOKEN"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"}
 ```
 
 **Không có token — mong đợi 401:**
-```
-curl.exe http://localhost:3000/api/me
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -SkipHttpErrorCheck
 ```
 
 **Token sai — mong đợi 401:**
-```
-curl.exe http://localhost:3000/api/me -H "Authorization: Bearer abc.def.ghi"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -Headers @{"Authorization"="Bearer abc.def.ghi"} -SkipHttpErrorCheck
 ```
 
 ---
@@ -303,33 +303,33 @@ curl.exe http://localhost:3000/api/me -H "Authorization: Bearer abc.def.ghi"
 ### GET /products
 
 **Tất cả sản phẩm — mong đợi 200:**
-```
-curl.exe "http://localhost:3000/api/products" -H "Authorization: Bearer YOUR_TOKEN"
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/products" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"}
 ```
 
 **Lọc available — mong đợi 200:**
-```
-curl.exe "http://localhost:3000/api/products?status=available" -H "Authorization: Bearer YOUR_TOKEN"
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=available" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"}
 ```
 
 **Lọc out_of_stock — mong đợi 200:**
-```
-curl.exe "http://localhost:3000/api/products?status=out_of_stock" -H "Authorization: Bearer YOUR_TOKEN"
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=out_of_stock" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"}
 ```
 
 **Lọc discontinued — mong đợi 200:**
-```
-curl.exe "http://localhost:3000/api/products?status=discontinued" -H "Authorization: Bearer YOUR_TOKEN"
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=discontinued" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"}
 ```
 
 **Status không hợp lệ — mong đợi 400:**
-```
-curl.exe "http://localhost:3000/api/products?status=invalid_value" -H "Authorization: Bearer YOUR_TOKEN"
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=invalid_value" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"} -SkipHttpErrorCheck
 ```
 
 **Không có token — mong đợi 401:**
-```
-curl.exe "http://localhost:3000/api/products?status=available"
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=available" -Method GET -SkipHttpErrorCheck
 ```
 
 ---
@@ -337,18 +337,18 @@ curl.exe "http://localhost:3000/api/products?status=available"
 ### Brute-force (chạy 6 lần liên tiếp)
 
 **Lần 1-4 (mong đợi 401 + số lần còn lại):**
-```
-curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}' -SkipHttpErrorCheck
 ```
 
 **Lần 5 (mong đợi 429 - bị khóa):**
-```
-curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}' -SkipHttpErrorCheck
 ```
 
 **Lần 6 — ĐÚNG mật khẩu nhưng VẪN 429:**
-```
-curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+```powershell
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}' -SkipHttpErrorCheck
 ```
 
 ---
