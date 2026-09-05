@@ -247,22 +247,22 @@ Mật khẩu được hash bằng `bcrypt` (saltRounds = 10). Không bao giờ l
 
 **Hợp lệ — mong đợi 201:**
 ```
-curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 **Email sai định dạng — mong đợi 400:**
 ```
-curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"khonghople\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"khonghople\", \"password\": \"matkhau123\"}"
 ```
 
 **Password <= 6 ký tự — mong đợi 400:**
 ```
-curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test2@example.com\", \"password\": \"123\"}"
+curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"test2@example.com\", \"password\": \"123\"}"
 ```
 
 **Email đã tồn tại — mong đợi 400:**
 ```
-curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/api/register -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 ---
@@ -271,12 +271,12 @@ curl.exe -X POST http://localhost:3000/register -H "Content-Type: application/js
 
 **Đăng nhập đúng — mong đợi 200 + token:**
 ```
-curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 **Sai mật khẩu — mong đợi 401:**
 ```
-curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
 ---
@@ -285,17 +285,17 @@ curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json"
 
 **Có token hợp lệ — mong đợi 200:**
 ```
-curl.exe http://localhost:3000/me -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe http://localhost:3000/api/me -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Không có token — mong đợi 401:**
 ```
-curl.exe http://localhost:3000/me
+curl.exe http://localhost:3000/api/me
 ```
 
 **Token sai — mong đợi 401:**
 ```
-curl.exe http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
+curl.exe http://localhost:3000/api/me -H "Authorization: Bearer abc.def.ghi"
 ```
 
 ---
@@ -304,32 +304,32 @@ curl.exe http://localhost:3000/me -H "Authorization: Bearer abc.def.ghi"
 
 **Tất cả sản phẩm — mong đợi 200:**
 ```
-curl.exe "http://localhost:3000/products" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/api/products" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Lọc available — mong đợi 200:**
 ```
-curl.exe "http://localhost:3000/products?status=available" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/api/products?status=available" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Lọc out_of_stock — mong đợi 200:**
 ```
-curl.exe "http://localhost:3000/products?status=out_of_stock" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/api/products?status=out_of_stock" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Lọc discontinued — mong đợi 200:**
 ```
-curl.exe "http://localhost:3000/products?status=discontinued" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/api/products?status=discontinued" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Status không hợp lệ — mong đợi 400:**
 ```
-curl.exe "http://localhost:3000/products?status=invalid_value" -H "Authorization: Bearer YOUR_TOKEN"
+curl.exe "http://localhost:3000/api/products?status=invalid_value" -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 **Không có token — mong đợi 401:**
 ```
-curl.exe "http://localhost:3000/products?status=available"
+curl.exe "http://localhost:3000/api/products?status=available"
 ```
 
 ---
@@ -338,17 +338,17 @@ curl.exe "http://localhost:3000/products?status=available"
 
 **Lần 1-4 (mong đợi 401 + số lần còn lại):**
 ```
-curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
 **Lần 5 (mong đợi 429 - bị khóa):**
 ```
-curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
+curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"saimatkhau\"}"
 ```
 
 **Lần 6 — ĐÚNG mật khẩu nhưng VẪN 429:**
 ```
-curl.exe -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
+curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"email\": \"test@example.com\", \"password\": \"matkhau123\"}"
 ```
 
 ---
