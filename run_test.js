@@ -43,7 +43,7 @@ async function runTests() {
   console.log(`[3] POST /api/login -> Đăng nhập đúng mật khẩu`);
   console.log(`    Status: ${r3.status} | Body: ${r3.body}`);
   const token = JSON.parse(r3.body).token;
-  console.log(`    Token: ${token ? token.substring(0, 40) + '...' : 'KHÔNG CÓ'}\n`);
+  console.log(`    Token: ${token ? token : 'KHÔNG CÓ'}\n`);
 
   // 4. Lấy thông tin user (GET /api/me)
   const r4 = await request('/api/me', 'GET', null, token);
