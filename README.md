@@ -252,17 +252,17 @@ Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers 
 
 **Email sai định dạng — mong đợi 400:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "khonghople", "password": "matkhau123"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "khonghople", "password": "matkhau123"}'
 ```
 
 **Password <= 6 ký tự — mong đợi 400:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test2@example.com", "password": "123"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test2@example.com", "password": "123"}'
 ```
 
 **Email đã tồn tại — mong đợi 400:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/register -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}'
 ```
 
 ---
@@ -276,7 +276,7 @@ Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"
 
 **Sai mật khẩu — mong đợi 401:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}'
 ```
 
 ---
@@ -290,12 +290,12 @@ Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -Headers @{"Auth
 
 **Không có token — mong đợi 401:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET
 ```
 
 **Token sai — mong đợi 401:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -Headers @{"Authorization"="Bearer abc.def.ghi"} -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/me -Method GET -Headers @{"Authorization"="Bearer abc.def.ghi"}
 ```
 
 ---
@@ -324,12 +324,12 @@ Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=discontinued" 
 
 **Status không hợp lệ — mong đợi 400:**
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=invalid_value" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"} -SkipHttpErrorCheck
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=invalid_value" -Method GET -Headers @{"Authorization"="Bearer YOUR_TOKEN"}
 ```
 
 **Không có token — mong đợi 401:**
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=available" -Method GET -SkipHttpErrorCheck
+Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=available" -Method GET
 ```
 
 ---
@@ -338,17 +338,17 @@ Invoke-RestMethod -Uri "http://localhost:3000/api/products?status=available" -Me
 
 **Lần 1-4 (mong đợi 401 + số lần còn lại):**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}'
 ```
 
 **Lần 5 (mong đợi 429 - bị khóa):**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "saimatkhau"}'
 ```
 
 **Lần 6 — ĐÚNG mật khẩu nhưng VẪN 429:**
 ```powershell
-Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}' -SkipHttpErrorCheck
+Invoke-RestMethod -Uri http://localhost:3000/api/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email": "test@example.com", "password": "matkhau123"}'
 ```
 
 ---
