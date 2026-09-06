@@ -15,7 +15,7 @@ Dạ em chào anh Phú, em gửi anh kết quả bài Test Backend ạ.
 1. **Kiểm soát kiến trúc:** Em yêu cầu AI giữ đúng cấu trúc đơn giản, không over-engineer (ví dụ: dùng In-Memory Map cho Brute-force thay vì setup Redis rườm rà).
 2. **Xử lý triệt để Edge Cases:** Em thảo luận với AI để bắt đúng lỗi `11000` của MongoDB cho bài toán Race-Condition khi đăng ký trùng email. Bắt lỗi `Validation`, `CastError` ở tầng Global Error Handler.
 3. **Debug môi trường thật:** Khi test bằng PowerShell bị lỗi cú pháp `curl` do PowerShell nhận nhầm thành `Invoke-WebRequest`, em đã prompt yêu cầu AI đổi toàn bộ sang `curl.exe` và thoát chuỗi JSON chuẩn xác để chạy test tự động 100% thành công.
-4. **Tài liệu & Comment:** Em đã comment cực kỳ chi tiết trong `authController.js` và `server.js` về các quyết định kỹ thuật này. Anh có thể xem toàn bộ quá trình tư duy của em ở file `AI_Prompt_History.txt` trong source code ạ. 
+4. **Tài liệu & Comment:** Em đã comment cực kỳ chi tiết trong `authController.js` và `server.js` về các quyết định kỹ thuật này. 
 
 Cảm ơn anh đã review!
 
