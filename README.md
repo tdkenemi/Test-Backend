@@ -6,9 +6,6 @@
 
 ---
 
-
----
-
 ## Ket qua kiem thu (chup man hinh CMD thuc te)
 
 > Chay tat ca lenh curl ben duoi, chup man hinh, dan vao day truoc khi nop bai.
