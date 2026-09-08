@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-// Lấy khóa bí mật từ file môi trường (hoặc dùng khóa mặc định dự phòng)
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
+// Lấy khóa bí mật từ biến môi trường (.env) — bắt buộc phải có
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) throw new Error('[authMiddleware] JWT_SECRET chưa được cấu hình trong file .env');
 
 /**
  * Middleware Kiểm tra và xác thực JWT Token (Bảo vệ API).

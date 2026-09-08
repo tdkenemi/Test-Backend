@@ -13,7 +13,8 @@ const {
 // Số vòng băm muối cho bcrypt, 10 là mức độ cân bằng tốt giữa bảo mật và hiệu năng
 const SALT_ROUNDS = 10;
 // Khóa bí mật dùng để mã hóa và giải mã JWT Token (cần bảo mật tuyệt đối trên server)
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) throw new Error('[authController] JWT_SECRET chưa được cấu hình trong file .env');
 
 // ────────────────────────────────────────────────────────────
 //  Helper: Validate email format
